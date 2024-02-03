@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Tools from 'components/Tools.jsx';
 import getRect from 'utilities/getRect.jsx';
 
-export default function TestForm(props) {
+export default function EditableStr(props) {
     const [editing, setEditing] = useState(false);
     const [content, setContent] = useState('');
     const [width, setWidth] = useState(0);
@@ -33,6 +34,11 @@ export default function TestForm(props) {
         });
     }
 
+    const undo = () => {
+        setEditing(false);
+        setContent(prevContent);
+    }
+
     const edit = c => {
         return new Promise((resolve, reject) => {
             resolve(_edit(c));
@@ -57,19 +63,17 @@ export default function TestForm(props) {
         return text;
     }
 
-    return <>    
-        <form onClick={expand} onSubmit={submit} ref={form}>
-            {editing ? '' : content}
-            <input 
-                type="text" 
-                value={content} 
-                hidden={!editing} 
-                onChange={e => setContent(e.target.value)} 
-                onFocus={() => setPrevContent(content)} 
-                onBlur={() => setContent(prevContent)} 
-                ref={input}
-                style={{'--width': width + 'px'}}
-            />
-        </form>
-    </>
+    return <form onClick={expand} onSubmit={submit} ref={form}>
+        {editing ? <Tools/> : content}
+        <input 
+            type="text" 
+            value={content} 
+            hidden={!editing} 
+            onChange={e => setContent(e.target.value)} 
+            onFocus={() => setPrevContent(content)} 
+            onBlur={undo} 
+            ref={input}
+            style={{'--width': width + 'px'}}
+        />
+    </form>
 }

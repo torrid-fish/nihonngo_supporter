@@ -11,11 +11,13 @@
     height: 8rem;
     background-color: hsl(275, 72%, 68%);
     color: #eee;
+    padding: 1rem;
 }
 
 .test form {
     width: fit-content;
     display: inline;
+    position: relative; /*for tools to work*/
 }
 
 .test input {

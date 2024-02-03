@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Test from 'components/Test.jsx';
+import TestPage from 'components/TestPage.jsx';
 
 export default function Main(props) {
     return <Router>
-        <Route exact path="/" component={Test}/>
+        <Route exact path="/" component={TestPage}/>
     </Router>
 }
