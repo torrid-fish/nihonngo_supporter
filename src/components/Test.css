@@ -1,0 +1,28 @@
+.test {
+    width: 100vw;
+    height: 100vh;
+    background-color: #232323;
+    display: grid;
+    place-items: center;
+}
+
+.test .wrap {
+    width: 32rem;
+    height: 8rem;
+    background-color: hsl(275, 72%, 68%);
+    color: #eee;
+}
+
+.test form {
+    width: fit-content;
+    display: inline;
+}
+
+.test input {
+    all: unset;
+    width: var(--width);
+}
+
+.test input:focus {
+    background-color: #0002;
+}
