@@ -20,9 +20,14 @@
     position: relative; /*for tools to work*/
 }
 
+.test span.marked {
+    background: #00f4;
+}
+
 .test input {
     all: unset;
     width: var(--width);
+    height: 1em;
 }
 
 .test input:focus {

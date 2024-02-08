@@ -4,18 +4,19 @@ import getRect from 'utilities/getRect.jsx';
 
 export default function EditableStr(props) {
     const [editing, setEditing] = useState(false);
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState(props.content);
     const [width, setWidth] = useState(0);
     const [prevContent, setPrevContent] = useState('');
+    const [marked, setMarked] = useState(false);
 
     const input = useRef(null);
     const form = useRef(null);
     const key = props.editKey;
 
     useEffect(() => {
-        fetch().then(c =>
-            setContent(c)
-        );
+        // fetch().then(c =>
+        //     setContent(c)
+        // );
         setWidth(getRect(form).width);
     }, []);
 
@@ -58,13 +59,13 @@ export default function EditableStr(props) {
     
     const _fetch = () => {
         let text = localStorage.getItem('edit' + key);
-        if (!text) 
-            return '-';
         return text;
     }
 
-    return <form onClick={expand} onSubmit={submit} ref={form}>
-        {editing ? <Tools/> : content}
+    return <form onSubmit={submit} ref={form}>
+        {editing ? 
+            <Tools marked={marked} toggleMarked={() => setMarked(m => !m)} insert={props.insert}/> :
+            <span className={marked ? 'marked' : ''} onClick={expand}>{content}</span>}
         <input 
             type="text" 
             value={content} 
